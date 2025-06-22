@@ -1,9 +1,9 @@
-name: Sync Repository for Vercel deploy
+name: Sync Personal Repository
 
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   check-org:
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout personal repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ secrets.REPOSITORY_OWNER }}/${{ secrets.REPOSITORY_NAME }}
+          repository: ${{ vars.REPOSITORY_OWNER }}/${{ vars.REPOSITORY_NAME }}
           ssh-key: ${{ secrets.REPOSITORY_DEPLOY_KEY }}
 
       - name: Setup SSH key
@@ -50,11 +50,8 @@ jobs:
         run: |
           git fetch upstream
 
-      - name: Merge changes from organization's master branch
+      - name: Force sync with upstream develop
         run: |
-          git checkout master
-          git merge upstream/master -X theirs --allow-unrelated-histories || true
-
-      - name: Push changes to personal repository
-        run: |
-          git push origin master
+          git checkout develop
+          git reset --hard upstream/develop
+          git push origin develop --force
