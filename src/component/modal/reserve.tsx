@@ -122,6 +122,11 @@ export default function ReserveModal({ space, onReserve }: ReserveModalProps) {
             await new Promise((res) => setTimeout(res, 500));
             onReserve({
               id: 'test-reservation',
+              user: {
+                id: user!.id,
+                club: user!.club,
+                name: user!.name,
+              },
               participants: values.participants.map(
                 (id) =>
                   ({

@@ -22,6 +22,7 @@ export enum Space {
 // ======================================== Internal DTO ========================================
 export interface ReservationDto {
   id: string;
+  user: UserDto;
   participants: UserDto[];
   club: Club;
   space: Space;

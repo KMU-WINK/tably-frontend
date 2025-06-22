@@ -162,7 +162,7 @@ export default function WeeklyTimetable({
                             {clubName(reservation.club)}
                           </div>
                           <div className="text-xs">
-                            {reservation.participants[0].name}
+                            {reservation.user.name}
                             {reservation.participants.length > 1 &&
                               ` 외 ${reservation.participants.length - 1}명`}
                           </div>
