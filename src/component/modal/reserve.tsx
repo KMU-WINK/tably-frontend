@@ -70,10 +70,11 @@ import { useForm } from 'react-hook-form';
 
 export interface ReserveModalProps {
   space: Space;
+  date?: string;
   onReserve: (reservation: ReservationDto) => void;
 }
 
-export default function ReserveModal({ space, onReserve }: ReserveModalProps) {
+export default function ReserveModal({ space, date, onReserve }: ReserveModalProps) {
   const [isApiProcessing, startApi] = useApiWithToast();
 
   const { user } = useUserStore();
@@ -91,7 +92,7 @@ export default function ReserveModal({ space, onReserve }: ReserveModalProps) {
     defaultValues: {
       participants: [user!.id],
       space,
-      date: format(new Date(), 'yyyy-MM-dd'),
+      date: date ?? format(new Date(), 'yyyy-MM-dd'),
       startTime: showGuide
         ? '09:00'
         : format(roundToNearestMinutes(new Date(), { nearestTo: 10 }), 'HH:mm'),

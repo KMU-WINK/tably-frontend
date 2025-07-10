@@ -47,6 +47,7 @@ export default function Page() {
         setTimeout(() => {
           open<ReserveModalProps>('reserve', {
             space,
+            date,
             onReserve: (reservation) => {
               if (!isSameDay(parse(reservation.date, 'yyyy-MM-dd', new Date()), date)) return;
               setReservations((prev) => [...prev, reservation]);
